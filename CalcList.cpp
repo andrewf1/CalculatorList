@@ -1,5 +1,4 @@
 #include "CalcList.hpp"
-#include <iostream>
 
 CalcList::CalcList() {
     total_val = 0.0;
@@ -8,6 +7,7 @@ CalcList::CalcList() {
     header->next = trailer;
     trailer->prev = header;
     total_val = 0.0;
+    size = 0;
 }
 
 CalcList::~CalcList() {
@@ -36,6 +36,8 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
             total_val /= operand;
             break;
     }
+    new_operation->node_total = total_val;
+    size++;
 }
 
 void CalcList::removeLastOperation() {
@@ -59,18 +61,44 @@ void CalcList::removeLastOperation() {
     CalcListNode* next_node = trailer;
     prev_node->next = next_node;
     trailer->prev = prev_node;
+    size--;
     delete node_to_remove;
+}
+
+//Have to implement set precision to the string still!!
+std::string CalcList::toString(unsigned short precision) {
+    std::ostringstream oSS;
+    auto length = size;
+    oSS << getOperationString(length, trailer->prev);
+    return oSS.str();
+}   
+
+std::string CalcList::getOperationString(unsigned int length, const CalcListNode* node) {
+    std::string op_strings;
+    std::ostringstream oSS;
+    if(node == header->next) {
+        oSS << "1: 0 " << node->operation << ' ' << node->operand << " = " << node->node_total;
+        oSS << std::endl;
+        op_strings += oSS.str();
+        return op_strings;
+    }
+    else {
+        oSS << length << ": " << node->prev->node_total << ' ' << node->operation << ' ';
+        oSS << node->operand << " = " << node->node_total << std::endl;
+        op_strings += oSS.str();
+        return op_strings + getOperationString(length - 1, node->prev);
+    }
 }
 
 int main() {
     
     CalcList newList;
     newList.newOperation(ADDITION, 10);
-    std::cout << "TOTAL = " << newList.total() << std::endl;
-    newList.newOperation(MULTIPLICATION, 100);
-    std::cout << "TOTAL = " << newList.total() << std::endl;
+    newList.newOperation(MULTIPLICATION, 10);
+    newList.newOperation(DIVISION, 5);
+    newList.newOperation(SUBTRACTION, 5);
+    std::cout << newList.toString(2);
     newList.removeLastOperation();
-    std::cout << "TOTAL = " << newList.total() << std::endl;
-
+    std::cout << newList.toString(2);
     return 0;    
 }

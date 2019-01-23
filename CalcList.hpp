@@ -5,6 +5,7 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
 class CalcListNode {
 public:
@@ -14,6 +15,7 @@ private:
     CalcListNode* prev;
     CalcListNode* next;
     FUNCTIONS operation;
+    double node_total;
     double operand;
 friend class CalcList;
 };
@@ -25,9 +27,11 @@ public:
     virtual double total() const override { return total_val; }
     virtual void newOperation(const FUNCTIONS func, const double operand) override;
     virtual void removeLastOperation() override;
-    virtual std::string toString(unsigned short precision) const override { return "hi"; }
+    virtual std::string toString(unsigned short precision) const override;
     bool empty() { return header->next == trailer; }
+    std::string getOperationString(unsigned int length, const CalcListNode* node) const;
 private:
+    unsigned int size;
     CalcListNode* header;
     CalcListNode* trailer;
     double total_val;
