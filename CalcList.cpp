@@ -16,7 +16,6 @@ CalcList::~CalcList() {
     }
     delete trailer;
     delete header;
-    
 }
 
 void CalcList::newOperation(const FUNCTIONS func, const double operand) {
@@ -38,6 +37,7 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
             total_val *= operand;
             break;
         case DIVISION:
+            if(operand == 0) throw("DiveByZero");
             total_val /= operand;
             break;
     }
@@ -45,7 +45,9 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
     size++;
 }
 
-void CalcList::removeLastOperation() {
+void CalcList::removeLastOperation() {\
+    if(empty())
+        throw("CannotRemoveFromEmptyList");
     CalcListNode* node_to_remove = trailer->prev;
     //Do the opposite operation to restore previous total_val
     switch(node_to_remove->operation) {
@@ -102,8 +104,8 @@ int main() {
     newList.newOperation(MULTIPLICATION, 10);
     newList.newOperation(DIVISION, 5);
     newList.newOperation(SUBTRACTION, 5);
-    std::cout << newList.toString(2);
-    newList.removeLastOperation();
-    std::cout << newList.toString(2);
+    // std::cout << newList.toString(2);
+    // newList.removeLastOperation();
+    // std::cout << newList.toString(2);
     return 0;    
 }
