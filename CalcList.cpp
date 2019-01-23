@@ -108,15 +108,15 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
     std::ostringstream oSS;
     if(node->prev == header) {
         double zero = 0.0000000000000000000000000000000000000000000000;
-        oSS << "1: " << std::setprecision(prec) << std::fixed << zero << ' ' << op << ' ' << node->operand << " = " << node->node_total;
+        oSS << "1: " << std::setprecision(prec) << std::fixed << zero << op << node->operand << "=" << node->node_total;
         oSS << std::endl;
         op_strings += oSS.str();
         return op_strings;
     }
     else {
         oSS << length << ": " << std::setprecision(prec) << std::fixed;
-        oSS << node->prev->node_total << ' ' << op << ' ' << std::setprecision(prec) << std::fixed;
-        oSS << node->operand << " = " << std::setprecision(prec) << std::fixed;
+        oSS << node->prev->node_total << op << std::setprecision(prec) << std::fixed;
+        oSS << node->operand << "=" << std::setprecision(prec) << std::fixed;
         oSS << node->node_total << std::endl;
         op_strings += oSS.str();
         return op_strings += getOperationString(length - 1, node->prev, prec);
