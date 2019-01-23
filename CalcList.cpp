@@ -6,7 +6,6 @@ CalcList::CalcList() {
     trailer = new CalcListNode;
     header->next = trailer;
     trailer->prev = header;
-    total_val = 0.0;
     size = 0;
 }
 
@@ -74,6 +73,8 @@ void CalcList::removeLastOperation() {\
 
 //Have to implement set precision to the string still!!
 std::string CalcList::toString(unsigned short precision) const {
+    std::cout << "Inside toString" << std::endl;
+    std::cout << "trailer->prev stuff is " << trailer->prev->node_total << ' ' << trailer->prev->operand << std::endl;
     std::ostringstream oSS;
     oSS << getOperationString(size, trailer->prev);
     return oSS.str();
