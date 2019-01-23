@@ -132,16 +132,21 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
     }
 }
 
-// int main() {
+int main() {
     
-//     CalcList newList;
-//     newList.newOperation(ADDITION, 10);
-//     newList.newOperation(MULTIPLICATION, 10);
-//     newList.newOperation(DIVISION, 5);
-//     newList.newOperation(SUBTRACTION, 5);
-//     std::cout << newList.toString(2);
-//     newList.removeLastOperation();
-//     newList.removeLastOperation();
-//     std::cout << newList.toString(2);
-//     return 0;    
-// }
+    CalcList newList;
+    newList.newOperation(ADDITION, 84.0);
+    newList.newOperation(MULTIPLICATION, 87.0);
+    newList.newOperation(SUBTRACTION, 78.0);
+    newList.newOperation(DIVISION, 16);
+    std::cout << newList.toString(3) << std::endl;
+    newList.removeLastOperation(); //rm1
+    std::cout << newList.toString(3);
+    newList.removeLastOperation(); //rm2
+    std::cout << newList.toString(3);
+    newList.removeLastOperation(); //rm3
+    std::cout << newList.toString(3);
+    newList.removeLastOperation(); //rm4
+    std::cout << newList.toString(3);
+    return 0;    
+}
