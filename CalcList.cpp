@@ -141,12 +141,17 @@ int main() {
     newList.newOperation(DIVISION, 16);
     std::cout << newList.toString(3) << std::endl;
     newList.removeLastOperation(); //rm1
-    std::cout << newList.toString(3);
+    std::cout << newList.toString(3) << std::endl;
     newList.removeLastOperation(); //rm2
-    std::cout << newList.toString(3);
-    newList.removeLastOperation(); //rm3
-    std::cout << newList.toString(3);
+    std::cout << newList.toString(3) << std::endl;
+    newList.removeLastOperation(); //rm3 FAILS
+    std::cout << newList.toString(3) << std::endl;
     newList.removeLastOperation(); //rm4
-    std::cout << newList.toString(3);
+    if(newList.total() == 0) {
+        std::cout << "You did something right" << std::endl;
+    }
+    else {
+        std::cout << "Youre still messing up" << std::endl;
+    }
     return 0;    
 }
