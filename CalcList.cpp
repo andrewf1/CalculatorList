@@ -82,11 +82,11 @@ void CalcList::removeLastOperation() {\
 //Have to implement set precision to the string still!!
 std::string CalcList::toString(unsigned short precision) const {
     std::ostringstream oSS;
-    oSS << getOperationString(size, trailer->prev);
+    oSS << getOperationString(size, trailer->prev, precision);
     return oSS.str();
 }   
 
-std::string CalcList::getOperationString(unsigned int length, const CalcListNode* node) const{
+std::string CalcList::getOperationString(unsigned int length, const CalcListNode* node, unsigned short prec) const{
     char op;
     switch(node->operation) {
         case ADDITION:
@@ -105,30 +105,33 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
     std::string op_strings = "";
     std::ostringstream oSS;
     if(node->prev == header) {
-        oSS << "1: 0 " << op << ' ' << node->operand << " = " << node->node_total;
+        double zero = 0.0000000000000000000000000000000000000000000000;
+        oSS << "1: " << std::setprecision(prec) << std::fixed << op << ' ' << node->operand << " = " << node->node_total;
         oSS << std::endl;
         op_strings += oSS.str();
         return op_strings;
     }
     else {
-        oSS << length << ": " << node->prev->node_total << ' ' << op << ' ';
-        oSS << node->operand << " = " << node->node_total << std::endl;
+        oSS << length << ": " << std::setprecision(prec) << std::fixed;
+        oSS << node->prev->node_total << ' ' << op << ' ' << std::setprecision(prec) << std::fixed;
+        oSS << node->operand << " = " << std::setprecision(prec) << std::fixed;
+        oSS << node->node_total << std::endl;
         op_strings += oSS.str();
-        return op_strings += getOperationString(length - 1, node->prev);
+        return op_strings += getOperationString(length - 1, node->prev, prec);
     }
 }
 
-int main() {
+// int main() {
     
-    CalcList newList;
-    newList.newOperation(ADDITION, 10);
-    newList.newOperation(MULTIPLICATION, 10);
-    newList.newOperation(DIVISION, 5);
-    newList.newOperation(SUBTRACTION, 5);
-    std::cout << "total = " << newList.total() << std::endl;
-    std::cout << newList.toString(2);
-    newList.removeLastOperation();
-    std::cout << std::endl;
-    std::cout << newList.toString(2);
-    return 0;    
-}
+//     CalcList newList;
+//     newList.newOperation(ADDITION, 10);
+//     newList.newOperation(MULTIPLICATION, 10);
+//     newList.newOperation(DIVISION, 5);
+//     newList.newOperation(SUBTRACTION, 5);
+//     std::cout << "total = " << newList.total() << std::endl;
+//     std::cout << newList.toString(2);
+//     newList.removeLastOperation();
+//     std::cout << std::endl;
+//     std::cout << newList.toString(2);
+//     return 0;    
+// }
