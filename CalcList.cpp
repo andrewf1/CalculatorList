@@ -1,6 +1,7 @@
 #include "CalcList.hpp"
 
 CalcList::CalcList() {
+    total_val = 0.0;
     header = new CalcListNode;
     trailer = new CalcListNode;
     header->next = trailer;
@@ -31,7 +32,6 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
         case DIVISION:
             total_val /= operand;
             break;
-        default:
     }
 }
 

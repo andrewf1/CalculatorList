@@ -16,7 +16,7 @@ private:
 
 class CalcList : public CalcListInterface {
 public:
-    CalcList() : total_val{0.0} {}
+    CalcList();
     ~CalcList();
     virtual double total() const override { return total_val; }
     virtual void newOperation(const FUNCTIONS func, const double operand) override;
