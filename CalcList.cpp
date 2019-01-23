@@ -81,16 +81,33 @@ std::string CalcList::toString(unsigned short precision) const {
 }   
 
 std::string CalcList::getOperationString(unsigned int length, const CalcListNode* node) const{
+    char op;
+    switch(node->operation) {
+        case ADDITION:
+            op = '+';
+            break;
+        case SUBTRACTION:
+            op = '-';
+            break;
+        case MULTIPLICATION:
+            op = '*';
+            break;
+        case DIVISION:
+            op = '/';
+            break;
+    }
+    std::cout << "Inside getOperationString" << std::endl;
+    std::cout << "node->node_total = " << node->node_total << "node->operation = " << op << "node->operand = " << node->operand << std::endl;
     std::string op_strings = "";
     std::ostringstream oSS;
     if(node == header->next) {
-        oSS << "1: 0 " << node->operation << ' ' << node->operand << " = " << node->node_total;
+        oSS << "1: 0 " << op << ' ' << node->operand << " = " << node->node_total;
         oSS << std::endl;
         op_strings += oSS.str();
         return op_strings;
     }
     else {
-        oSS << length << ": " << node->prev->node_total << ' ' << node->operation << ' ';
+        oSS << length << ": " << node->prev->node_total << ' ' << op << ' ';
         oSS << node->operand << " = " << node->node_total << std::endl;
         op_strings += oSS.str();
         return op_strings + getOperationString(length - 1, node->prev);
