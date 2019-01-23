@@ -125,7 +125,7 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
     std::string op_strings = "";
     std::ostringstream oSS;
     if(node->prev == header) { // Base case (1 node in the list)
-        double zero = 0.0000000;
+        double zero = 0.0;
         oSS << "1: " << std::setprecision(prec) << std::fixed << zero << op << node->operand << "=" << node->node_total;
         oSS << std::endl;
         op_strings += oSS.str();
