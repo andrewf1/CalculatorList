@@ -65,12 +65,12 @@ void CalcList::removeLastOperation() {
 int main() {
     
     CalcList newList;
-    if(newList.total() == 0.0) {
-        std::cout << "correct construction" << std::endl;
-    }
-    else {
-        std::cout << "Improper construction?" << std::endl;
-    }
+    newList.newOperation(ADDITION, 10);
+    std::cout << "TOTAL = " << newList.total() << std::endl;
+    newList.newOperation(MULTIPLICATION, 100);
+    std::cout << "TOTAL = " << newList.total() << std::endl;
+    newList.removeLastOperation();
+    std::cout << "TOTAL = " << newList.total() << std::endl;
 
     return 0;    
 }
