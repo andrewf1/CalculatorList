@@ -21,10 +21,18 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
     CalcListNode* new_operation = new CalcListNode;
     new_operation->operation = func;
     new_operation->operand = operand;
-    new_operation->next = trailer;
-    new_operation->prev = trailer->prev;
-    trailer->prev = new_operation;
-    trailer->prev->next = trailer->prev;
+    if(empty()) {
+        header->next = new_operation;
+        new_operation->prev = header;
+        new_operation->next = trailer;
+        trailer->prev = new_operation;
+    }
+    else {
+        new_operation->next = trailer;
+        new_operation->prev = trailer->prev;
+        trailer->prev->next = new_operation;
+        trailer->prev = new_operation;
+    }
     switch(func) {
         case ADDITION:
             total_val += operand;
@@ -36,7 +44,7 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
             total_val *= operand;
             break;
         case DIVISION:
-            if(operand == 0) throw("DiveByZero");
+            if(operand == 0) throw("DivideByZero");
             total_val /= operand;
             break;
     }
@@ -99,8 +107,7 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
     std::cout << "node->node_total = " << node->node_total << " node->operation = " << op << " node->operand = " << node->operand << std::endl;
     std::string op_strings = "";
     std::ostringstream oSS;
-    std::cout << "header->next->next->node_total = " << header->next->next->node_total << " node->operation = " << op << " header->next->next->operand = " << header->next->next->operand << std::endl;
-    if(node == header->next->next) {
+    if(node->prev == header) {
         oSS << "1: 0 " << op << ' ' << node->operand << " = " << node->node_total;
         oSS << std::endl;
         op_strings += oSS.str();
