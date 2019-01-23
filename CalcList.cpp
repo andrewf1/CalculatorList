@@ -80,8 +80,6 @@ void CalcList::removeLastOperation() {
         CalcListNode* next_node = trailer;
         prev_node->next = next_node;
         trailer->prev = prev_node;
-        size--;
-        delete node_to_remove;
     }
     else { // For when there is only 1 element left in the list
         total_val = 0.0;
