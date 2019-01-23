@@ -53,10 +53,11 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
     size++;
 }
 
-void CalcList::removeLastOperation() {\
+void CalcList::removeLastOperation() {
     if(empty())
         throw("CannotRemoveFromEmptyList");
     CalcListNode* node_to_remove = trailer->prev;
+
     //Do the opposite operation to restore previous total_val
     switch(node_to_remove->operation) {
         case ADDITION:
@@ -73,10 +74,20 @@ void CalcList::removeLastOperation() {\
             total_val *= node_to_remove->operand;
             break;
     }
-    CalcListNode* prev_node = node_to_remove->prev;
-    CalcListNode* next_node = trailer;
-    prev_node->next = next_node;
-    trailer->prev = prev_node;
+
+    if(size != 1) {
+        CalcListNode* prev_node = node_to_remove->prev;
+        CalcListNode* next_node = trailer;
+        prev_node->next = next_node;
+        trailer->prev = prev_node;
+        size--;
+        delete node_to_remove;
+    }
+    else { // For when there is only 1 element left in the list
+        total_val = 0.0;
+        header->next = trailer;
+        trailer->prev = header;
+    }
     size--;
     delete node_to_remove;
 }
@@ -123,16 +134,16 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
     }
 }
 
-int main() {
+// int main() {
     
-    CalcList newList;
-    newList.newOperation(ADDITION, 10);
-    newList.newOperation(MULTIPLICATION, 10);
-    newList.newOperation(DIVISION, 5);
-    newList.newOperation(SUBTRACTION, 5);
-    std::cout << newList.toString(2);
-    newList.removeLastOperation();
-    newList.removeLastOperation();
-    std::cout << newList.toString(2);
-    return 0;    
-}
+//     CalcList newList;
+//     newList.newOperation(ADDITION, 10);
+//     newList.newOperation(MULTIPLICATION, 10);
+//     newList.newOperation(DIVISION, 5);
+//     newList.newOperation(SUBTRACTION, 5);
+//     std::cout << newList.toString(2);
+//     newList.removeLastOperation();
+//     newList.removeLastOperation();
+//     std::cout << newList.toString(2);
+//     return 0;    
+// }
