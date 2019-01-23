@@ -44,7 +44,8 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
             total_val *= operand;
             break;
         case DIVISION:
-            if(operand == 0) throw("DivideByZero");
+            if(operand == 0) 
+                throw("DivideByZero");
             total_val /= operand;
             break;
     }
@@ -65,7 +66,8 @@ void CalcList::removeLastOperation() {\
             total_val += node_to_remove->operand;
             break;
         case MULTIPLICATION:
-            total_val /= node_to_remove->operand;
+            if(node_to_remove->operand == 0)
+                total_val = node_to_remove->prev->node_total;
             break;
         case DIVISION:
             total_val *= node_to_remove->operand;
