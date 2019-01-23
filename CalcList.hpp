@@ -5,18 +5,18 @@
 
 class CalcListNode {
 public:
-
+    CalcListNode();
+    ~CalcListNode();
 private:
     CalcListNode* prev;
     CalcListNode* next;
-    double node_total;
     FUNCTIONS operation;
     friend class CalcList;
 };
 
 class CalcList : public CalcListInterface {
 public:
-    CalcList() = default;
+    CalcList() : total_val{0.0} {}
     ~CalcList();
     virtual double total() const override { return total_val; }
     virtual void newOperation(const FUNCTIONS func, const double operand) override;
