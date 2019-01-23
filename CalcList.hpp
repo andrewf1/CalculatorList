@@ -1,11 +1,11 @@
 #ifndef CALCLIST_HPP
 #define CALCLIST_HPP
 
-#include "CalcListInterface.hpp"
 #include <string>
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+#include "CalcListInterface.hpp"
 
 class CalcListNode {
 public:
@@ -29,7 +29,7 @@ public:
     virtual void removeLastOperation() override;
     virtual std::string toString(unsigned short precision) const override;
     bool empty() { return header->next == trailer; }
-    std::string getOperationString(unsigned int length, const CalcListNode* node) const;
+    std::string getOperationString(unsigned int length, const CalcListNode* node);
 private:
     unsigned int size;
     CalcListNode* header;

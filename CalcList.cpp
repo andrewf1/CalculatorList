@@ -66,7 +66,7 @@ void CalcList::removeLastOperation() {
 }
 
 //Have to implement set precision to the string still!!
-std::string CalcList::toString(unsigned short precision) {
+std::string CalcList::toString(unsigned short precision) const {
     std::ostringstream oSS;
     auto length = size;
     oSS << getOperationString(length, trailer->prev);
