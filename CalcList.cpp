@@ -51,5 +51,5 @@ int main() {
         std::cout << "Improper construction?" << std::endl;
     }
 
-    return 0;
+    return 0;    
 }
