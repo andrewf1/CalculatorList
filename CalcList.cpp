@@ -75,13 +75,12 @@ void CalcList::removeLastOperation() {\
 //Have to implement set precision to the string still!!
 std::string CalcList::toString(unsigned short precision) const {
     std::ostringstream oSS;
-    auto length = size;
-    oSS << getOperationString(length, trailer->prev);
+    oSS << getOperationString(size, trailer->prev);
     return oSS.str();
 }   
 
 std::string CalcList::getOperationString(unsigned int length, const CalcListNode* node) const{
-    std::string op_strings;
+    std::string op_strings = "";
     std::ostringstream oSS;
     if(node == header->next) {
         oSS << "1: 0 " << node->operation << ' ' << node->operand << " = " << node->node_total;
@@ -104,6 +103,7 @@ int main() {
     newList.newOperation(MULTIPLICATION, 10);
     newList.newOperation(DIVISION, 5);
     newList.newOperation(SUBTRACTION, 5);
+    std::cout << "total = " << newList.total() << std::endl;
     std::cout << newList.toString(2);
     // newList.removeLastOperation();
     // std::cout << newList.toString(2);
