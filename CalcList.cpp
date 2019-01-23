@@ -104,7 +104,7 @@ int main() {
     newList.newOperation(MULTIPLICATION, 10);
     newList.newOperation(DIVISION, 5);
     newList.newOperation(SUBTRACTION, 5);
-    // std::cout << newList.toString(2);
+    std::cout << newList.toString(2);
     // newList.removeLastOperation();
     // std::cout << newList.toString(2);
     return 0;    
