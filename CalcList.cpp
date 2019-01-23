@@ -109,7 +109,7 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
         oSS << length << ": " << node->prev->node_total << ' ' << op << ' ';
         oSS << node->operand << " = " << node->node_total << std::endl;
         op_strings += oSS.str();
-        op_strings += getOperationString(length - 1, node->prev);
+        return op_strings += getOperationString(length - 1, node->prev);
     }
 }
 
