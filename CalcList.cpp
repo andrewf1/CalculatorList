@@ -1,4 +1,5 @@
 #include "CalcList.hpp"
+#include <iostream>
 
 CalcList::CalcList() {
     total_val = 0.0;
@@ -37,4 +38,17 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
 
 void CalcList::removeLastOperation() {
 
+}
+
+int main() {
+    
+    CalcList newList;
+    if(newList.total() == 0.0) {
+        std::cout << "correct construction" << std::endl;
+    }
+    else {
+        std::cout << "Improper construction?" << std::endl;
+    }
+
+    return 0;
 }
