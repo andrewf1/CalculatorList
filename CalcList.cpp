@@ -11,7 +11,12 @@ CalcList::CalcList() {
 }
 
 CalcList::~CalcList() {
-
+    while(!empty()) {
+        removeLastOperation();
+    }
+    delete trailer;
+    delete header;
+    
 }
 
 void CalcList::newOperation(const FUNCTIONS func, const double operand) {
