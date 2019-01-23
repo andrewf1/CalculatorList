@@ -3,11 +3,9 @@
 
 #include "CalcListInterface.hpp"
 
-class CalcListNode {
-public:
+struct CalcListNode {
     CalcListNode();
     ~CalcListNode();
-private:
     CalcListNode* prev;
     CalcListNode* next;
     FUNCTIONS operation;
