@@ -54,6 +54,7 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
 }
 
 void CalcList::removeLastOperation() {
+    std::cout << "At beginning of function, size = " << size << std::endl;
     if(empty())
         throw("CannotRemoveFromEmptyList");
     CalcListNode* node_to_remove = trailer->prev;
@@ -67,26 +68,31 @@ void CalcList::removeLastOperation() {
             total_val += node_to_remove->operand;
             break;
         case MULTIPLICATION:
-            if(node_to_remove->operand == 0)
+            if(node_to_remove->operand == 0) {
                 total_val = node_to_remove->prev->node_total;
+            }
+            else {
+                total_val /= node_to_remove->operand;
+            }
             break;
         case DIVISION:
             total_val *= node_to_remove->operand;
             break;
     }
 
-    if(size != 1) {
+    if(size >= 1) {
         CalcListNode* prev_node = node_to_remove->prev;
         CalcListNode* next_node = trailer;
         prev_node->next = next_node;
         trailer->prev = prev_node;
     }
-    else { // For when there is only 1 element left in the list
+    else {
         total_val = 0.0;
         header->next = trailer;
         trailer->prev = header;
     }
     size--;
+    std::cout << "After the function, size = " << size << std::endl;
     delete node_to_remove;
 }
 
@@ -132,26 +138,26 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
     }
 }
 
-int main() {
+// int main() {
     
-    CalcList newList;
-    newList.newOperation(ADDITION, 84.0);
-    newList.newOperation(MULTIPLICATION, 87.0);
-    newList.newOperation(SUBTRACTION, 78.0);
-    newList.newOperation(DIVISION, 16);
-    std::cout << newList.toString(3) << std::endl;
-    newList.removeLastOperation(); //rm1
-    std::cout << newList.toString(3) << std::endl;
-    newList.removeLastOperation(); //rm2
-    std::cout << newList.toString(3) << std::endl;
-    newList.removeLastOperation(); //rm3 FAILS
-    std::cout << newList.toString(3) << std::endl;
-    newList.removeLastOperation(); //rm4
-    if(newList.total() == 0) {
-        std::cout << "You did something right" << std::endl;
-    }
-    else {
-        std::cout << "Youre still messing up" << std::endl;
-    }
-    return 0;    
-}
+//     CalcList newList;
+//     newList.newOperation(ADDITION, 84.0);
+//     newList.newOperation(MULTIPLICATION, 87.0);
+//     newList.newOperation(SUBTRACTION, 78.0);
+//     newList.newOperation(DIVISION, 16);
+//     std::cout << newList.toString(3) << std::endl;
+//     newList.removeLastOperation(); //rm1
+//     std::cout << newList.toString(3) << std::endl;
+//     newList.removeLastOperation(); //rm2
+//     std::cout << newList.toString(3) << std::endl;
+//     newList.removeLastOperation(); //rm3 FAILS
+//     std::cout << newList.toString(3) << std::endl; //Getting 84 still when it should be 0
+//     newList.removeLastOperation(); //rm4
+//     if(newList.total() == 0) {
+//         std::cout << "You did something right" << std::endl;
+//     }
+//     else {
+//         std::cout << "Youre still messing up" << std::endl;
+//     }
+//     return 0;    
+// }
