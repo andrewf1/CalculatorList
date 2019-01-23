@@ -123,17 +123,16 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
     }
 }
 
-// int main() {
+int main() {
     
-//     CalcList newList;
-//     newList.newOperation(ADDITION, 10);
-//     newList.newOperation(MULTIPLICATION, 10);
-//     newList.newOperation(DIVISION, 5);
-//     newList.newOperation(SUBTRACTION, 5);
-//     std::cout << "total = " << newList.total() << std::endl;
-//     std::cout << newList.toString(2);
-//     newList.removeLastOperation();
-//     std::cout << std::endl;
-//     std::cout << newList.toString(2);
-//     return 0;    
-// }
+    CalcList newList;
+    newList.newOperation(ADDITION, 10);
+    newList.newOperation(MULTIPLICATION, 10);
+    newList.newOperation(DIVISION, 5);
+    newList.newOperation(SUBTRACTION, 5);
+    std::cout << newList.toString(2);
+    newList.removeLastOperation();
+    newList.removeLastOperation();
+    std::cout << newList.toString(2);
+    return 0;    
+}
