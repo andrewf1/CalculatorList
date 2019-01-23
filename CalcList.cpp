@@ -19,7 +19,8 @@ void CalcList::newOperation(const FUNCTIONS func, const double operand) {
     new_operation->operation = func;
     new_operation->next = trailer;
     new_operation->prev = trailer->prev;
-    trailer->prev->next = trailer->prev = new_operation;
+    trailer->prev = new_operation;
+    trailer->prev->next = trailer->prev;
     switch(func) {
         case ADDITION:
             total_val += operand;
