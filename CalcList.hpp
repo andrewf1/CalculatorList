@@ -4,8 +4,8 @@
 #include "CalcListInterface.hpp"
 
 struct CalcListNode {
-    CalcListNode();
-    ~CalcListNode();
+    CalcListNode() = default;
+    ~CalcListNode() = default;
     CalcListNode* prev;
     CalcListNode* next;
     FUNCTIONS operation;
