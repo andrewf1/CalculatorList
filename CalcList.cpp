@@ -81,7 +81,6 @@ void CalcList::removeLastOperation() {\
 
 //Have to implement set precision to the string still!!
 std::string CalcList::toString(unsigned short precision) const {
-    std::cout << "Inside toString" << std::endl;
     std::ostringstream oSS;
     oSS << getOperationString(size, trailer->prev);
     return oSS.str();
@@ -103,8 +102,6 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
             op = '/';
             break;
     }
-    std::cout << "Inside getOperationString" << std::endl;
-    std::cout << "node->node_total = " << node->node_total << " node->operation = " << op << " node->operand = " << node->operand << std::endl;
     std::string op_strings = "";
     std::ostringstream oSS;
     if(node->prev == header) {
@@ -130,7 +127,8 @@ int main() {
     newList.newOperation(SUBTRACTION, 5);
     std::cout << "total = " << newList.total() << std::endl;
     std::cout << newList.toString(2);
-    // newList.removeLastOperation();
-    // std::cout << newList.toString(2);
+    newList.removeLastOperation();
+    std::cout << std::endl;
+    std::cout << newList.toString(2);
     return 0;    
 }
