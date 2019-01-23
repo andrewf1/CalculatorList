@@ -73,7 +73,7 @@ std::string CalcList::toString(unsigned short precision) const {
     return oSS.str();
 }   
 
-std::string CalcList::getOperationString(unsigned int length, const CalcListNode* node) {
+std::string CalcList::getOperationString(unsigned int length, const CalcListNode* node) const{
     std::string op_strings;
     std::ostringstream oSS;
     if(node == header->next) {

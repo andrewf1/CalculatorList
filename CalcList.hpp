@@ -29,7 +29,7 @@ public:
     virtual void removeLastOperation() override;
     virtual std::string toString(unsigned short precision) const override;
     bool empty() { return header->next == trailer; }
-    std::string getOperationString(unsigned int length, const CalcListNode* node);
+    std::string getOperationString(unsigned int length, const CalcListNode* node) const;
 private:
     unsigned int size;
     CalcListNode* header;
