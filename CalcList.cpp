@@ -99,7 +99,7 @@ std::string CalcList::getOperationString(unsigned int length, const CalcListNode
     std::cout << "node->node_total = " << node->node_total << " node->operation = " << op << " node->operand = " << node->operand << std::endl;
     std::string op_strings = "";
     std::ostringstream oSS;
-    if(node == header->next) {
+    if(node == header->next->next) {
         oSS << "1: 0 " << op << ' ' << node->operand << " = " << node->node_total;
         oSS << std::endl;
         op_strings += oSS.str();
